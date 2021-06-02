@@ -1,0 +1,32 @@
+---
+# tasks file for roles/php-handler
+# - name: Download Remi repo rpm
+#   get_url: 
+#     url: http://rpms.remirepo.net/enterprise/remi-release-7.rpm 
+#     dest: /tmp
+
+- name: Install Remi 7 repo
+  yum: 
+    name: http://rpms.remirepo.net/enterprise/remi-release-7.rpm 
+    state: present
+
+- name: Enable Remi-php70
+  shell: yum-config-manager --enable remi-php70
+
+# - name: upgrade all packages
+#   yum: name=* state=latest
+
+- name: Install php
+  yum: 
+    name: 
+      - php
+      - php-common
+      - php-opcache
+      - php-mcrypt
+      - php-cli
+      - php-gd
+      - php-curl
+      - php-mysql
+      - php-mbstring
+#    enablerepo: remi-php70 
+    state: present

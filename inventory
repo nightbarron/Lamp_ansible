@@ -1,0 +1,9 @@
+[all:vars]
+ansible_connection=ssh
+#ansible_user=ansible
+ansible_user=ansible
+ansible_password='123456a@'
+ansible_sudo_pass='123456a@'
+
+[webservers]
+192.168.75.143

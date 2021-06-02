@@ -1,0 +1,19 @@
+---
+# tasks file for common
+- name: Open http firewall port
+  firewalld:
+    service: http
+    zone: public
+    immediate: yes
+    permanent: true
+    state: enabled
+
+- name: Add epel-release repo
+  yum:
+    name: epel-release
+    state: present
+
+- name: Install yum-utils
+  yum:
+    name: yum-utils, wget, curl
+    state: present

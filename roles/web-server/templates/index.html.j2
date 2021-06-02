@@ -1,0 +1,24 @@
+<html>
+    <body>
+       <h1>Hello from Ansible: {{ ansible_nodename }} </h1>
+        <br>
+        <pre>
+         Ansible Node: {{ ansible_nodename }}
+        FQDN: {{ ansible_fqdn }} 
+        IP Address: {{ ansible_default_ipv4.address }}        
+        Distribution: {{ ansible_distribution }} {{ ansible_distribution_release }} {{ ansible_distribution_version }}
+        Kernel: {{ ansible_kernel }} 
+        Python Version: {{ ansible_python_version }}
+        CPUs: {{ ansible_processor_vcpus }}
+        Memory: {{ ansible_memtotal_mb }} MB  
+        Virtualization: {{ ansible_virtualization_type }}
+        The current date is: {{ ansible_date_time.date }} and it is a {{ ansible_date_time.weekday }}
+        Ansible User Information:
+ user: {{ ansible_env.SUDO_USER }}
+        uid: {{ ansible_env.SUDO_UID }} 
+ gid: {{ ansible_env.SUDO_GID }}
+        home: {{ ansible_env.HOME }} 
+        pwd: {{ ansible_env.PWD }} 
+        </pre>
+   </body>
+</html>

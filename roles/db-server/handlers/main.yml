@@ -1,0 +1,12 @@
+---
+# handlers file for db-server
+- name: Start mariadb
+  service: 
+    name: mariadb
+    state: started 
+    enabled: true
+
+- name: Restart mariadb
+  service: 
+    name: mariadb
+    state: restarted

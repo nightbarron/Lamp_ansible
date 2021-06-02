@@ -1,0 +1,22 @@
+---
+# tasks file for db-server
+- name: Install MariaDB
+  yum: 
+    name: mariadb-server
+    state: present
+  notify: Start mariadb
+
+- name: Change mysql root password and keep track in 
+  shell: |
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'P@ssw0rd'; flush privileges; "
+    echo "[client]"
+    user=root
+    password=P@ssw0rd > /root/.my.cnf
+  args:
+    creates: /root/.my.cnf
+  register: change_temp_pass
+  notify: Restart mariadb
+
+- meta: flush_handlers
+- debug:
+    var: change_temp_pass

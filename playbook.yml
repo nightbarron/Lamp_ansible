@@ -1,0 +1,11 @@
+- hosts: webservers           # What is this??
+  #remote_user: tuandlh
+  become: true
+  #become_method: sudo
+  #become_user: root
+
+  roles:
+    - common
+    - web-server
+    - db-server
+    - php-handler
