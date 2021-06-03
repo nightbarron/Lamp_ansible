@@ -5,11 +5,26 @@
     name: httpd
     state: present
     
-- name: httpd template for index.html
+- name: Create index.html
   template:
     src: index.html.j2 
     dest: /var/www/html/index.html
+    owner: apache
+    group: apache
     mode: 0644
+  notify: restart httpd
+
+- name: Create info.php
+  copy:
+    dest: /var/www/html/info.php
+    content: |
+      <?php
+        system("id");
+        phpinfo();
+      ?>
+    owner: apache
+    group: apache
+    mode: 0710
   notify: restart httpd
 
 # - name: install nginx

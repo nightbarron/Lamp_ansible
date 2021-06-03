@@ -4,19 +4,21 @@
   yum: 
     name: mariadb-server
     state: present
-  notify: Start mariadb
+  notify:
+    - Start mariadb
+
+- name: Flush handlers
+  meta: flush_handlers
 
 - name: Change mysql root password and keep track in 
   shell: |
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'P@ssw0rd'; flush privileges; "
-    echo "[client]"
-    user=root
-    password=P@ssw0rd > /root/.my.cnf
-  args:
-    creates: /root/.my.cnf
-  register: change_temp_pass
+    mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('P@ssw0rd'); flush privileges;"
   notify: Restart mariadb
 
-- meta: flush_handlers
-- debug:
-    var: change_temp_pass
+- name: Create Config Mariadb
+  shell: |
+    printf '[client]
+    user=root
+    password=P@ssw0rd' > /root/.my.cnf
+  args:
+    creates: /root/.my.cnf
